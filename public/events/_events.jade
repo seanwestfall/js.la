@@ -13,19 +13,23 @@ div.jsla-toplevel-container.jsla-event-container
             img( src="/images/logo.svg" alt="js.la logo" class="jsla-logo-image" onerror="this.src='/images/logotype-trans.png'" )
         span   presentations from #{year}
 
-each event in events
+each event, index in events
+    if index < 1
 
-    div.jsla-toplevel-container.wide.jsla-past-event
-        div.jsla-toplevel-container
-            h2(id= getDateSlug( event.date ))= event.datetime
+      div.jsla-toplevel-container.wide.jsla-past-event
+          div.jsla-toplevel-container
+              h2(id= getDateSlug( event.date ))= event.datetime
 
-            ul.jsla-speakers-list
-                each speaker in event.speakers
-                    != partial("../components/speakers/_speaker", speaker )
+              ul.jsla-speakers-list
+                  each speaker in event.speakers
+                      != partial("../components/speakers/_speaker", speaker )
 
-        != partial( "../components/_sponsors-box", { sponsors: event.sponsors } )
+          != partial( "../components/_sponsors-box", { sponsors: event.sponsors } )
 
-        if event.flickr
-            div.jsla-toplevel-container
-                div.jsla-event-photos.jsla-content-section.layer-2( data-flickr=event.flickr )
-                    h2 Event Photos
+          if event.flickr
+              div.jsla-toplevel-container
+                  div.jsla-event-photos.jsla-content-section.layer-2( data-flickr=event.flickr )
+                      h2 Event Photos
+
+div.jsla-action-buttons
+  a.pure-button.jsla-button-xlarge( href="https://jsla.eventbrite.com/?aff=site").i.fa.fa-spinner Load More
